@@ -161,7 +161,7 @@ public class UsuarioControlador {
      * @param email El correo electrónico del usuario a confirmar.
      * @return ResponseEntity con el resultado de la operación.
      */
-    @PostMapping("/confirmar-correo/{email}")
+    @PostMapping("/confirmarCorreo/{email}")
     public ResponseEntity<?> confirmarCorreo(@PathVariable String email) {
         try {
             usuarioServicio.confirmarCorreoUsuario(email);
