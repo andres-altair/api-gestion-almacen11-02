@@ -316,6 +316,7 @@ public class UsuarioServicio {
         usuarioDTO.setCorreoElectronico(usuarioEntidad.getCorreoElectronico()); // Establecer el correo electrónico
         usuarioDTO.setFoto(usuarioEntidad.getFoto()); // Establecer la foto
         usuarioDTO.setFechaCreacion(usuarioEntidad.getFechaCreacion()); // Establecer la fecha de creación
+        usuarioDTO.setCorreoConfirmado(usuarioEntidad.isCorreoConfirmado()); // Establecer el estado de confirmación del correo
         usuarioDTO.setRolId(usuarioEntidad.getRol().getId());
         return usuarioDTO; // Devolver el DTO
     }
@@ -325,6 +326,7 @@ public class UsuarioServicio {
         usuarioDTO.setMovil(usuarioEntidad.getMovil()); // Establecer el número de móvil
         usuarioDTO.setCorreoElectronico(usuarioEntidad.getCorreoElectronico()); // Establecer el correo electrónico
         usuarioDTO.setFoto(usuarioEntidad.getFoto()); // Establecer la foto
+        usuarioDTO.setCorreoConfirmado(usuarioEntidad.isCorreoConfirmado()); // Establecer el estado de confirmación del correo
         
         // Manejar el caso de rol nulo
         if (usuarioEntidad.getRol() != null) {
