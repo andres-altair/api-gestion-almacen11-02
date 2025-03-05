@@ -3,6 +3,8 @@ package com.example.api_gestion_almacen.controladores;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,6 +31,8 @@ import com.example.api_gestion_almacen.servicios.UsuarioServicio;
 @RequestMapping("api/usuarios")
 public class UsuarioControlador {
 
+    private static final Logger logger = LoggerFactory.getLogger(UsuarioControlador.class);
+
     @Autowired
     private UsuarioServicio usuarioServicio; // Servicio para manejar la lógica de negocio relacionada con usuarios
 
@@ -42,21 +46,21 @@ public class UsuarioControlador {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> crearUsuario(@RequestBody CrearUsuDto crearUsuDTO) {
         try {
-            System.out.println("UsuarioControlador.crearUsuario - Iniciando creación de usuario");
-            System.out.println("Datos recibidos: " + crearUsuDTO.toString());
+            logger.info("Iniciando creación de usuario: {}", crearUsuDTO.getCorreoElectronico());
+            logger.debug("Datos recibidos: {}", crearUsuDTO);
             
             CrearUsuDto nuevoUsuario = usuarioServicio.crearUsuario(crearUsuDTO);
             
-            System.out.println("Usuario creado: " + (nuevoUsuario != null ? nuevoUsuario.toString() : "null"));
+            logger.info("Usuario creado exitosamente: {}", nuevoUsuario.getCorreoElectronico());
             return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuario);
         } catch (RuntimeException e) {
-            System.err.println("Error al crear usuario: " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Error al crear usuario: {}", e.getMessage(), e);
             if (e.getMessage().contains("correo electrónico ya está registrado")) {
                 return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(Map.of("error", e.getMessage()));
             }
-            throw e;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Error al crear usuario: " + e.getMessage());
         }
     }
 
@@ -69,6 +73,7 @@ public class UsuarioControlador {
      */
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public UsuarioDto obtenerUsuarioPorId(@PathVariable Long id) { 
+        logger.info("Obteniendo usuario con ID: {}", id);
         return usuarioServicio.obtenerUsuarioPorId(id); 
     }
 
@@ -80,9 +85,9 @@ public class UsuarioControlador {
      */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UsuarioDto> obtenerTodosLosUsuarios() { 
-        System.out.println("UsuarioControlador.obtenerTodosLosUsuarios - Iniciando");
+        logger.info("Obteniendo lista de todos los usuarios");
         List<UsuarioDto> usuarios = usuarioServicio.obtenerTodosLosUsuarios();
-        System.out.println("UsuarioControlador.obtenerTodosLosUsuarios - Usuarios encontrados: " + (usuarios != null ? usuarios.size() : "null"));
+        logger.info("Total de usuarios encontrados: {}", usuarios.size());
         return usuarios;
     }
 
@@ -99,15 +104,15 @@ public class UsuarioControlador {
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> actualizarUsuario(@PathVariable Long id, @RequestBody CrearUsuDto usuarioDTO) {
         try {
-            System.out.println("UsuarioControlador.actualizarUsuario - Iniciando actualización de usuario " + id);
-            System.out.println("Datos recibidos: " + usuarioDTO.toString());
+            logger.info("Iniciando actualización de usuario con ID: {}", id);
+            logger.debug("Datos de actualización: {}", usuarioDTO);
             
             CrearUsuDto usuarioActualizado = usuarioServicio.actualizarUsuario(id, usuarioDTO);
             
-            System.out.println("Usuario actualizado: " + (usuarioActualizado != null ? usuarioActualizado.toString() : "null"));
+            logger.info("Usuario actualizado exitosamente. ID: {}", id);
             return ResponseEntity.ok(usuarioActualizado);
         } catch (Exception e) {
-            System.err.println("Error al actualizar usuario: " + e.getMessage());
+            logger.error("Error al actualizar usuario {}: {}", id, e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error al actualizar usuario: " + e.getMessage());
         }
@@ -119,9 +124,18 @@ public class UsuarioControlador {
      *
      * @param id El ID del usuario a eliminar.
      */
-    @DeleteMapping(path = "/{id}")
-    public void eliminarUsuario(@PathVariable Long id) {
-        usuarioServicio.eliminarUsuario(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> eliminarUsuario(@PathVariable Long id) {
+        try {
+            logger.info("Iniciando eliminación de usuario con ID: {}", id);
+            usuarioServicio.eliminarUsuario(id);
+            logger.info("Usuario eliminado exitosamente. ID: {}", id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            logger.error("Error al eliminar usuario {}: {}", id, e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al eliminar usuario: " + e.getMessage());
+        }
     }
     
     /**
@@ -137,19 +151,24 @@ public class UsuarioControlador {
             String correoElectronico = credenciales.get("correoElectronico");
             String contrasena = credenciales.get("contrasena");
             
+            logger.info("Intento de autenticación para usuario: {}", correoElectronico);
+            
             if (correoElectronico == null || correoElectronico.isEmpty() || contrasena == null || contrasena.isEmpty()) {
+                logger.warn("Intento de autenticación con credenciales incompletas");
                 return ResponseEntity.badRequest()
                     .body(Map.of("error", "Correo electrónico y contraseña son requeridos"));
             }
             
             UsuarioDto usuarioAutenticado = usuarioServicio.autenticarUsuario(correoElectronico, contrasena);
+            logger.info("Autenticación exitosa para: {}", correoElectronico);
             return ResponseEntity.ok(usuarioAutenticado);
         } catch (RuntimeException e) {
+            logger.error("Error de autenticación: {}", e.getMessage());
             return ResponseEntity.status(401)
                 .body(Map.of("error", e.getMessage()));
         } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500)
+            logger.error("Error inesperado durante la autenticación: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(Map.of("error", "Error interno del servidor"));
         }
     }
@@ -164,9 +183,12 @@ public class UsuarioControlador {
     @PostMapping("/confirmarCorreo/{email}")
     public ResponseEntity<?> confirmarCorreo(@PathVariable String email) {
         try {
+            logger.info("Iniciando confirmación de correo para: {}", email);
             usuarioServicio.confirmarCorreoUsuario(email);
+            logger.info("Correo confirmado exitosamente para: {}", email);
             return ResponseEntity.ok().body(Map.of("mensaje", "Correo confirmado exitosamente"));
         } catch (Exception e) {
+            logger.error("Error al confirmar correo para {}: {}", email, e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(Map.of("error", "Error al confirmar correo: " + e.getMessage()));
         }
@@ -182,19 +204,24 @@ public class UsuarioControlador {
     @PostMapping("/actualizarContrasena")
     public ResponseEntity<?> actualizarContrasena(@RequestBody Map<String, String> datos) {
         try {
-            String email = datos.get("email");
+            String correoElectronico = datos.get("correoElectronico");
             String nuevaContrasena = datos.get("nuevaContrasena");
             
-            if (email == null || nuevaContrasena == null) {
+            logger.info("Iniciando actualización de contraseña para usuario: {}", correoElectronico);
+            
+            if (correoElectronico == null || nuevaContrasena == null) {
+                logger.warn("Intento de actualización de contraseña con datos incompletos");
                 return ResponseEntity.badRequest()
-                    .body(Map.of("error", "Email y nueva contraseña son requeridos"));
+                    .body(Map.of("error", "Correo electrónico y nueva contraseña son requeridos"));
             }
             
-            usuarioServicio.actualizarContrasenaUsuario(email, nuevaContrasena);
+            usuarioServicio.actualizarContrasenaUsuario(correoElectronico, nuevaContrasena);
+            logger.info("Contraseña actualizada exitosamente para: {}", correoElectronico);
             return ResponseEntity.ok()
                 .body(Map.of("mensaje", "Contraseña actualizada exitosamente"));
                 
         } catch (Exception e) {
+            logger.error("Error al actualizar contraseña: {}", e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(Map.of("error", "Error al actualizar contraseña: " + e.getMessage()));
         }
