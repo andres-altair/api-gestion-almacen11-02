@@ -31,7 +31,7 @@ public class UsuarioEntidad {
     private boolean correoConfirmado;
 
     @Lob
-    @Column(name = "foto")
+    @Column(name = "foto", columnDefinition = "LONGBLOB")
     private byte[] foto;
 
     @Column(name = "fecha_creacion", insertable = false, updatable = false)

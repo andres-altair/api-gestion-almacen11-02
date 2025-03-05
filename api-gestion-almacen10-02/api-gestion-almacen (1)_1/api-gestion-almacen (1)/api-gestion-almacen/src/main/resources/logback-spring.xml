@@ -5,7 +5,7 @@
     <!-- Appender para consola -->
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss} %-5level - %msg%n</pattern>
         </encoder>
     </appender>
     
@@ -19,16 +19,21 @@
             <totalSizeCap>3GB</totalSizeCap>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss} %-5level - %msg%n</pattern>
         </encoder>
     </appender>
     
-    <!-- Niveles de log -->
-    <root level="INFO">
+    <!-- Configuración de niveles de log -->
+    <root level="WARN">
         <appender-ref ref="Console"/>
         <appender-ref ref="File"/>
     </root>
     
-    <!-- Configuración específica para tu paquete -->
+    <!-- Solo nuestro paquete en DEBUG -->
     <logger name="com.example.api_gestion_almacen" level="DEBUG"/>
+    
+    <!-- Silenciar logs de Spring -->
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="com.zaxxer.hikari" level="WARN"/>
 </configuration>
