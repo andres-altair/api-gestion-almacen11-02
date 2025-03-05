@@ -171,5 +171,32 @@ public class UsuarioControlador {
                 .body(Map.of("error", "Error al confirmar correo: " + e.getMessage()));
         }
     }
-    
+
+    /**
+     * Actualiza la contraseña de un usuario.
+     * @author andres
+     *
+     * @param datos Un mapa que contiene el correo electrónico y la nueva contraseña del usuario.
+     * @return ResponseEntity con el resultado de la operación.
+     */
+    @PostMapping("/actualizarContrasena")
+    public ResponseEntity<?> actualizarContrasena(@RequestBody Map<String, String> datos) {
+        try {
+            String email = datos.get("email");
+            String nuevaContrasena = datos.get("nuevaContrasena");
+            
+            if (email == null || nuevaContrasena == null) {
+                return ResponseEntity.badRequest()
+                    .body(Map.of("error", "Email y nueva contraseña son requeridos"));
+            }
+            
+            usuarioServicio.actualizarContrasenaUsuario(email, nuevaContrasena);
+            return ResponseEntity.ok()
+                .body(Map.of("mensaje", "Contraseña actualizada exitosamente"));
+                
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Map.of("error", "Error al actualizar contraseña: " + e.getMessage()));
+        }
+    }
 }

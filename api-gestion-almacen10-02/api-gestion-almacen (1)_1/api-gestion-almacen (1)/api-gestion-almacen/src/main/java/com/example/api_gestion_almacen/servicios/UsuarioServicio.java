@@ -226,6 +226,36 @@ public class UsuarioServicio {
     }
 
     /**
+     * Actualiza la contraseña de un usuario.
+     * @author andres
+     * 
+     * @param email El correo electrónico del usuario
+     * @param nuevaContrasena La nueva contraseña a establecer
+     * @throws RuntimeException Si el usuario no existe o hay un error al actualizar
+     */
+    public void actualizarContrasenaUsuario(String email, String nuevaContrasena) {
+        System.out.println("UsuarioServicio.actualizarContrasenaUsuario - Iniciando actualización de contraseña para " + email);
+        
+        // 1. Buscar usuario por email
+        UsuarioEntidad usuario = usuarioRepositorio.findByCorreoElectronico(email)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+            
+        try {
+            // 2. Actualizar contraseña
+            usuario.setContrasena(nuevaContrasena);
+            
+            // 3. Guardar cambios
+            usuarioRepositorio.save(usuario);
+            System.out.println("Contraseña actualizada exitosamente para: " + email);
+            
+        } catch (Exception e) {
+            System.err.println("Error al actualizar contraseña: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Error al actualizar contraseña: " + e.getMessage());
+        }
+    }
+
+    /**
      * Convierte un UsuarioDto a una UsuarioEntidad.
      * @author andres
      * 
