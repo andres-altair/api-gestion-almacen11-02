@@ -8278,3 +8278,122 @@ Unconditional classes:
 18:20:33 DEBUG - Using 'application/json', given [application/json] and supported [application/json]
 18:20:33 DEBUG - Writing [com.example.api_gestion_almacen.dtos.UsuarioDto@73f90b0c]
 18:20:33 DEBUG - Completed 200 OK
+18:29:00 DEBUG - GET "/api/usuarios/correo/boltaxmd@gmail.com", parameters={}
+18:29:00 DEBUG - Mapped to com.example.api_gestion_almacen.controladores.UsuarioControlador#buscarPorCorreo(String)
+18:29:00 INFO  - Buscando usuario por correo: boltaxmd@gmail.com
+18:29:00 DEBUG - 
+    select
+        ue1_0.id,
+        ue1_0.contrasena,
+        ue1_0.correo_confirmado,
+        ue1_0.correo_electronico,
+        ue1_0.fecha_creacion,
+        ue1_0.foto,
+        ue1_0.google,
+        ue1_0.movil,
+        ue1_0.nombre_completo,
+        ue1_0.rol_id 
+    from
+        usuarios ue1_0 
+    where
+        ue1_0.correo_electronico=?
+18:29:00 DEBUG - 
+    select
+        re1_0.id,
+        re1_0.nombre 
+    from
+        roles re1_0 
+    where
+        re1_0.id=?
+18:29:00 INFO  - Usuario encontrado: boltaxmd@gmail.com
+18:29:00 DEBUG - Using 'application/json', given [application/json] and supported [application/json]
+18:29:00 DEBUG - Writing [com.example.api_gestion_almacen.dtos.UsuarioDto@708d1a8a]
+18:29:00 DEBUG - Completed 200 OK
+18:29:00 DEBUG - PUT "/api/usuarios/51", parameters={}
+18:29:00 DEBUG - Mapped to com.example.api_gestion_almacen.controladores.UsuarioControlador#actualizarUsuario(Long, CrearUsuDto)
+18:29:00 DEBUG - Read "application/json;charset=UTF-8" to [CrearUsuDto{nombreCompleto='andres', movil='null', correoElectronico='boltaxmd@gmail.com', rolId=4,  (truncated)...]
+18:29:00 INFO  - Iniciando actualización de usuario con ID: 51
+18:29:00 DEBUG - Datos de actualización: CrearUsuDto{nombreCompleto='andres', movil='null', correoElectronico='boltaxmd@gmail.com', rolId=4, contrasena='[PROTECTED]', foto=presente}
+18:29:00 DEBUG - 
+    select
+        ue1_0.id,
+        ue1_0.contrasena,
+        ue1_0.correo_confirmado,
+        ue1_0.correo_electronico,
+        ue1_0.fecha_creacion,
+        ue1_0.foto,
+        ue1_0.google,
+        ue1_0.movil,
+        ue1_0.nombre_completo,
+        r1_0.id,
+        r1_0.nombre 
+    from
+        usuarios ue1_0 
+    left join
+        roles r1_0 
+            on r1_0.id=ue1_0.rol_id 
+    where
+        ue1_0.id=?
+18:29:01 DEBUG - 
+    select
+        re1_0.id,
+        re1_0.nombre 
+    from
+        roles re1_0 
+    where
+        re1_0.id=?
+18:29:01 DEBUG - 
+    select
+        ue1_0.id,
+        ue1_0.contrasena,
+        ue1_0.correo_confirmado,
+        ue1_0.correo_electronico,
+        ue1_0.fecha_creacion,
+        ue1_0.foto,
+        ue1_0.google,
+        ue1_0.movil,
+        ue1_0.nombre_completo,
+        r1_0.id,
+        r1_0.nombre 
+    from
+        usuarios ue1_0 
+    left join
+        roles r1_0 
+            on r1_0.id=ue1_0.rol_id 
+    where
+        ue1_0.id=?
+18:29:01 INFO  - Usuario actualizado exitosamente. ID: 51
+18:29:01 DEBUG - Using 'application/json', given [*/*] and supported [application/json]
+18:29:01 DEBUG - Writing [CrearUsuDto{nombreCompleto='andres', movil='null', correoElectronico='boltaxmd@gmail.com', rolId=4,  (truncated)...]
+18:29:01 DEBUG - Completed 200 OK
+18:29:01 DEBUG - GET "/api/usuarios/correo/boltaxmd@gmail.com", parameters={}
+18:29:01 DEBUG - Mapped to com.example.api_gestion_almacen.controladores.UsuarioControlador#buscarPorCorreo(String)
+18:29:01 INFO  - Buscando usuario por correo: boltaxmd@gmail.com
+18:29:01 DEBUG - 
+    select
+        ue1_0.id,
+        ue1_0.contrasena,
+        ue1_0.correo_confirmado,
+        ue1_0.correo_electronico,
+        ue1_0.fecha_creacion,
+        ue1_0.foto,
+        ue1_0.google,
+        ue1_0.movil,
+        ue1_0.nombre_completo,
+        ue1_0.rol_id 
+    from
+        usuarios ue1_0 
+    where
+        ue1_0.correo_electronico=?
+18:29:02 DEBUG - 
+    select
+        re1_0.id,
+        re1_0.nombre 
+    from
+        roles re1_0 
+    where
+        re1_0.id=?
+18:29:02 INFO  - Usuario encontrado: boltaxmd@gmail.com
+18:29:02 DEBUG - Using 'application/json', given [application/json] and supported [application/json]
+18:29:02 DEBUG - Writing [com.example.api_gestion_almacen.dtos.UsuarioDto@53494bdc]
+18:29:02 DEBUG - Completed 200 OK
