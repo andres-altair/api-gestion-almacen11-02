@@ -2,6 +2,7 @@ package com.example.api_gestion_almacen.controladores;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.api_gestion_almacen.dtos.CrearUsuDto;
 import com.example.api_gestion_almacen.dtos.UsuarioDto;
+import com.example.api_gestion_almacen.entidades.UsuarioEntidad;
 import com.example.api_gestion_almacen.servicios.UsuarioServicio;
 
 /**
@@ -224,6 +226,36 @@ public class UsuarioControlador {
             logger.error("Error al actualizar contraseña: {}", e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(Map.of("error", "Error al actualizar contraseña: " + e.getMessage()));
+        }
+    }
+
+    /**
+     * Busca un usuario por su correo electrónico.
+     * @author andres
+     *
+     * @param email El correo electrónico del usuario a buscar
+     * @return El usuario correspondiente al correo proporcionado
+     */
+    @GetMapping(path = "/correo/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> buscarPorCorreo(@PathVariable String email) {
+        try {
+            logger.info("Buscando usuario por correo: {}", email);
+            
+            UsuarioDto usuario = usuarioServicio.buscarPorCorreoElectronico(email);
+            
+            if (usuario == null) {
+                logger.info("Usuario no encontrado para correo: {}", email);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", "Usuario no encontrado"));
+            }
+            
+            logger.info("Usuario encontrado: {}", usuario.getCorreoElectronico());
+            return ResponseEntity.ok(usuario);
+            
+        } catch (Exception e) {
+            logger.error("Error al buscar usuario por correo {}: {}", email, e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Map.of("error", "Error al buscar usuario: " + e.getMessage()));
         }
     }
 }

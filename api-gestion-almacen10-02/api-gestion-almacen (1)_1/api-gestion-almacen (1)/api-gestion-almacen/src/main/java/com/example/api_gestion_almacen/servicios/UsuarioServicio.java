@@ -269,6 +269,75 @@ public class UsuarioServicio {
     }
 
     /**
+     * Busca un usuario por su correo electrónico.
+     * @author andres
+     * 
+     * @param correoElectronico El correo electrónico del usuario a buscar
+     * @return UsuarioDto si existe, null si no existe
+     */
+    public UsuarioDto buscarPorCorreoElectronico(String correoElectronico) {
+        System.out.println("UsuarioServicio.buscarPorCorreoElectronico - Buscando usuario con correo: " + correoElectronico);
+        
+        try {
+            Optional<UsuarioEntidad> usuarioOpt = usuarioRepositorio.findByCorreoElectronico(correoElectronico);
+            
+            if (!usuarioOpt.isPresent()) {
+                System.out.println("Usuario no encontrado para correo: " + correoElectronico);
+                return null;
+            }
+            
+            UsuarioEntidad usuario = usuarioOpt.get();
+            UsuarioDto usuarioDto = aDto(usuario);
+            
+            System.out.println("Usuario encontrado -> ID: " + usuarioDto.getId() + 
+                             ", Nombre: " + usuarioDto.getNombreCompleto() + 
+                             ", Email: " + usuarioDto.getCorreoElectronico() + 
+                             ", Google: " + usuarioDto.isGoogle() +
+                             ", Confirmado: " + usuarioDto.isCorreoConfirmado());
+            
+            return usuarioDto;
+            
+        } catch (Exception e) {
+            System.err.println("Error al buscar usuario por correo: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Error al buscar usuario por correo: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Busca un usuario por su correo electrónico.
+     * @author andres
+     * 
+     * @param correoElectronico El correo electrónico del usuario a buscar
+     * @return Optional con el usuario si existe, o vacío si no existe
+     */
+    public Optional<UsuarioEntidad> buscarPorCorreoElectronico2(String correoElectronico) {
+        System.out.println("UsuarioServicio.buscarPorCorreoElectronico - Buscando usuario con correo: " + correoElectronico);
+        
+        try {
+            Optional<UsuarioEntidad> usuarioOpt = usuarioRepositorio.findByCorreoElectronico(correoElectronico);
+            
+            if (usuarioOpt.isPresent()) {
+                UsuarioEntidad usuario = usuarioOpt.get();
+                System.out.println("Usuario encontrado -> ID: " + usuario.getId() + 
+                                 ", Nombre: " + usuario.getNombreCompleto() + 
+                                 ", Email: " + usuario.getCorreoElectronico() + 
+                                 ", Google: " + usuario.isGoogle() +
+                                 ", Confirmado: " + usuario.isCorreoConfirmado());
+            } else {
+                System.out.println("Usuario no encontrado para correo: " + correoElectronico);
+            }
+            
+            return usuarioOpt;
+            
+        } catch (Exception e) {
+            System.err.println("Error al buscar usuario por correo: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Error al buscar usuario por correo: " + e.getMessage());
+        }
+    }
+
+    /**
      * Convierte un UsuarioDto a una UsuarioEntidad.
      * @author andres
      * 
@@ -319,24 +388,27 @@ public class UsuarioServicio {
     }
 
     /**
-     * Convierte una UsuarioEntidad a un UsuarioDto.
+     * Convierte una entidad Usuario a DTO.
      * @author andres
      * 
-     * @param usuarioEntidad La entidad a convertir.
-     * @return El objeto DTO correspondiente.
+     * @param usuarioEntidad La entidad a convertir
+     * @return El DTO resultante
      */
-    private UsuarioDto aDto(UsuarioEntidad usuarioEntidad) {
-        UsuarioDto usuarioDTO = new UsuarioDto(); // Crear un nuevo DTO
-        usuarioDTO.setId(usuarioEntidad.getId()); // Establecer el ID
-        usuarioDTO.setNombreCompleto(usuarioEntidad.getNombreCompleto()); // Establecer el nombre completo
-        usuarioDTO.setMovil(usuarioEntidad.getMovil()); // Establecer el número de móvil
-        usuarioDTO.setCorreoElectronico(usuarioEntidad.getCorreoElectronico()); // Establecer el correo electrónico
-        usuarioDTO.setRolId(usuarioEntidad.getRol().getId());
-        usuarioDTO.setFoto(usuarioEntidad.getFoto()); // Establecer la foto
-        usuarioDTO.setFechaCreacion(usuarioEntidad.getFechaCreacion()); // Establecer la fecha de creación
-        usuarioDTO.setCorreoConfirmado(usuarioEntidad.isCorreoConfirmado()); // Establecer el estado de confirmación del correo
-        usuarioDTO.setGoogle(usuarioEntidad.isGoogle());
-        return usuarioDTO; // Devolver el DTO
+    public UsuarioDto aDto(UsuarioEntidad usuarioEntidad) {
+        if (usuarioEntidad == null) return null;
+        
+        UsuarioDto dto = new UsuarioDto();
+        dto.setId(usuarioEntidad.getId());
+        dto.setNombreCompleto(usuarioEntidad.getNombreCompleto());
+        dto.setMovil(usuarioEntidad.getMovil());
+        dto.setCorreoElectronico(usuarioEntidad.getCorreoElectronico());
+        dto.setRolId(usuarioEntidad.getRol().getId());
+        dto.setFoto(usuarioEntidad.getFoto());
+        dto.setFechaCreacion(usuarioEntidad.getFechaCreacion());
+        dto.setCorreoConfirmado(usuarioEntidad.isCorreoConfirmado());
+        dto.setGoogle(usuarioEntidad.isGoogle());
+        
+        return dto;
     }
     private CrearUsuDto aDto2(UsuarioEntidad usuarioEntidad) {
         CrearUsuDto usuarioDTO = new CrearUsuDto(); // Crear un nuevo DTO
