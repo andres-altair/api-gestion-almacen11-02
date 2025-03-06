@@ -9581,3 +9581,130 @@ Unconditional classes:
 22:37:25 INFO  - Started ApiGestionAlmacenApplication in 4.893 seconds (process running for 5.41)
 22:37:25 DEBUG - Application availability state LivenessState changed to CORRECT
 22:37:25 DEBUG - Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
+23:43:34 INFO  - Initializing Servlet 'dispatcherServlet'
+23:43:34 DEBUG - Detected StandardServletMultipartResolver
+23:43:34 DEBUG - Detected AcceptHeaderLocaleResolver
+23:43:34 DEBUG - Detected FixedThemeResolver
+23:43:34 DEBUG - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@930911e
+23:43:34 DEBUG - Detected org.springframework.web.servlet.support.SessionFlashMapManager@4fae4c3b
+23:43:34 DEBUG - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+23:43:34 INFO  - Completed initialization in 25 ms
+23:43:34 DEBUG - GET "/api/usuarios/correo/boltaxmd@gmail.com", parameters={}
+23:43:34 DEBUG - Mapped to com.example.api_gestion_almacen.controladores.UsuarioControlador#buscarPorCorreo(String)
+23:43:34 INFO  - Buscando usuario por correo: boltaxmd@gmail.com
+23:43:35 DEBUG - 
+    select
+        ue1_0.id,
+        ue1_0.contrasena,
+        ue1_0.correo_confirmado,
+        ue1_0.correo_electronico,
+        ue1_0.fecha_creacion,
+        ue1_0.foto,
+        ue1_0.google,
+        ue1_0.movil,
+        ue1_0.nombre_completo,
+        ue1_0.rol_id 
+    from
+        usuarios ue1_0 
+    where
+        ue1_0.correo_electronico=?
+23:43:35 DEBUG - 
+    select
+        re1_0.id,
+        re1_0.nombre 
+    from
+        roles re1_0 
+    where
+        re1_0.id=?
+23:43:35 INFO  - Usuario encontrado: boltaxmd@gmail.com
+23:43:35 DEBUG - Using 'application/json', given [application/json] and supported [application/json]
+23:43:35 DEBUG - Writing [com.example.api_gestion_almacen.dtos.UsuarioDto@9169db0]
+23:43:35 DEBUG - Completed 200 OK
+23:43:35 DEBUG - PUT "/api/usuarios/51", parameters={}
+23:43:35 DEBUG - Mapped to com.example.api_gestion_almacen.controladores.UsuarioControlador#actualizarUsuario(Long, CrearUsuDto)
+23:43:35 DEBUG - Read "application/json;charset=UTF-8" to [CrearUsuDto{nombreCompleto='andres', movil='null', correoElectronico='boltaxmd@gmail.com', rolId=4,  (truncated)...]
+23:43:35 INFO  - Iniciando actualización de usuario con ID: 51
+23:43:35 DEBUG - Datos de actualización: CrearUsuDto{nombreCompleto='andres', movil='null', correoElectronico='boltaxmd@gmail.com', rolId=4, contrasena='[PROTECTED]', foto=presente}
+23:43:36 DEBUG - 
+    select
+        ue1_0.id,
+        ue1_0.contrasena,
+        ue1_0.correo_confirmado,
+        ue1_0.correo_electronico,
+        ue1_0.fecha_creacion,
+        ue1_0.foto,
+        ue1_0.google,
+        ue1_0.movil,
+        ue1_0.nombre_completo,
+        r1_0.id,
+        r1_0.nombre 
+    from
+        usuarios ue1_0 
+    left join
+        roles r1_0 
+            on r1_0.id=ue1_0.rol_id 
+    where
+        ue1_0.id=?
+23:43:36 DEBUG - 
+    select
+        re1_0.id,
+        re1_0.nombre 
+    from
+        roles re1_0 
+    where
+        re1_0.id=?
+23:43:36 DEBUG - 
+    select
+        ue1_0.id,
+        ue1_0.contrasena,
+        ue1_0.correo_confirmado,
+        ue1_0.correo_electronico,
+        ue1_0.fecha_creacion,
+        ue1_0.foto,
+        ue1_0.google,
+        ue1_0.movil,
+        ue1_0.nombre_completo,
+        r1_0.id,
+        r1_0.nombre 
+    from
+        usuarios ue1_0 
+    left join
+        roles r1_0 
+            on r1_0.id=ue1_0.rol_id 
+    where
+        ue1_0.id=?
+23:43:37 INFO  - Usuario actualizado exitosamente. ID: 51
+23:43:37 DEBUG - Using 'application/json', given [*/*] and supported [application/json]
+23:43:37 DEBUG - Writing [CrearUsuDto{nombreCompleto='andres', movil='null', correoElectronico='boltaxmd@gmail.com', rolId=4,  (truncated)...]
+23:43:37 DEBUG - Completed 200 OK
+23:43:37 DEBUG - GET "/api/usuarios/correo/boltaxmd@gmail.com", parameters={}
+23:43:37 DEBUG - Mapped to com.example.api_gestion_almacen.controladores.UsuarioControlador#buscarPorCorreo(String)
+23:43:37 INFO  - Buscando usuario por correo: boltaxmd@gmail.com
+23:43:37 DEBUG - 
+    select
+        ue1_0.id,
+        ue1_0.contrasena,
+        ue1_0.correo_confirmado,
+        ue1_0.correo_electronico,
+        ue1_0.fecha_creacion,
+        ue1_0.foto,
+        ue1_0.google,
+        ue1_0.movil,
+        ue1_0.nombre_completo,
+        ue1_0.rol_id 
+    from
+        usuarios ue1_0 
+    where
+        ue1_0.correo_electronico=?
+23:43:37 DEBUG - 
+    select
+        re1_0.id,
+        re1_0.nombre 
+    from
+        roles re1_0 
+    where
+        re1_0.id=?
+23:43:37 INFO  - Usuario encontrado: boltaxmd@gmail.com
+23:43:37 DEBUG - Using 'application/json', given [application/json] and supported [application/json]
+23:43:37 DEBUG - Writing [com.example.api_gestion_almacen.dtos.UsuarioDto@290ade34]
+23:43:37 DEBUG - Completed 200 OK
