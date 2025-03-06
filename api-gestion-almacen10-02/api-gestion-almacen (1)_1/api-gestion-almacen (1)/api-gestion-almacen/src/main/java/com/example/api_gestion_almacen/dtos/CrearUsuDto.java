@@ -10,6 +10,7 @@ public class CrearUsuDto {
     private String	contrasena;
     private byte[] foto;
 	private boolean correoConfirmado; 
+	private boolean google;
 	
     public CrearUsuDto() {
     }
@@ -66,6 +67,12 @@ public class CrearUsuDto {
 	}
 	public void setCorreoConfirmado(boolean correoConfirmado) {
 		this.correoConfirmado = correoConfirmado;
+	}
+	public boolean isGoogle() {
+		return google;
+	}
+	public void setGoogle(boolean google) {
+		this.google = google;
 	}
 	
 	@Override

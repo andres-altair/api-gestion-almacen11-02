@@ -1,27 +1,27 @@
-11:20:32 INFO  - Starting ApiGestionAlmacenApplication using Java 21.0.4 with PID 7148 (C:\Users\amoliaz\DWS\api-gestion-almacen11-02\api-gestion-almacen10-02\api-gestion-almacen (1)_1\api-gestion-almacen (1)\api-gestion-almacen\target\classes started by amoliaz in C:\Users\amoliaz\DWS\api-gestion-almacen11-02\api-gestion-almacen10-02\api-gestion-almacen (1)_1\api-gestion-almacen (1)\api-gestion-almacen)
-11:20:32 DEBUG - Running with Spring Boot v3.4.2, Spring v6.2.2
-11:20:32 INFO  - No active profile set, falling back to 1 default profile: "default"
-11:20:32 DEBUG - Loading source class com.example.api_gestion_almacen.ApiGestionAlmacenApplication
-11:20:32 DEBUG - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6175619b
-11:20:32 DEBUG - @EnableAutoConfiguration was declared on a class in the package 'com.example.api_gestion_almacen'. Automatic @Repository and @Entity scanning is enabled.
-11:20:33 DEBUG - Code archive: C:\Users\amoliaz\.m2\repository\org\springframework\boot\spring-boot\3.4.2\spring-boot-3.4.2.jar
-11:20:33 DEBUG - Code archive: C:\Users\amoliaz\.m2\repository\org\springframework\boot\spring-boot\3.4.2\spring-boot-3.4.2.jar
-11:20:33 DEBUG - Document root: C:\Users\amoliaz\DWS\api-gestion-almacen11-02\api-gestion-almacen10-02\api-gestion-almacen (1)_1\api-gestion-almacen (1)\api-gestion-almacen\src\main\webapp
-11:20:33 INFO  - Tomcat initialized with port 8081 (http)
-11:20:33 DEBUG - Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
-11:20:33 INFO  - Root WebApplicationContext: initialization completed in 1267 ms
-11:20:33 DEBUG - Mapping filters: characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
-11:20:33 DEBUG - Mapping servlets: dispatcherServlet urls=[/]
-11:20:33 DEBUG - Filter 'requestContextFilter' configured for use
-11:20:33 DEBUG - Filter 'characterEncodingFilter' configured for use
-11:20:33 DEBUG - Filter 'formContentFilter' configured for use
-11:20:36 DEBUG - 15 mappings in 'requestMappingHandlerMapping'
-11:20:36 DEBUG - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-11:20:36 DEBUG - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-11:20:36 DEBUG - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-11:20:36 DEBUG - Application Admin MBean registered with name 'org.springframework.boot:type=Admin,name=SpringApplication'
-11:20:36 INFO  - Tomcat started on port 8081 (http) with context path '/'
-11:20:36 DEBUG - 
+14:32:37 INFO  - Starting ApiGestionAlmacenApplication using Java 21.0.4 with PID 9564 (C:\Users\amoliaz\DWS\api-gestion-almacen11-02\api-gestion-almacen10-02\api-gestion-almacen (1)_1\api-gestion-almacen (1)\api-gestion-almacen\target\classes started by amoliaz in C:\Users\amoliaz\DWS\api-gestion-almacen11-02\api-gestion-almacen10-02\api-gestion-almacen (1)_1\api-gestion-almacen (1)\api-gestion-almacen)
+14:32:37 DEBUG - Running with Spring Boot v3.4.2, Spring v6.2.2
+14:32:37 INFO  - No active profile set, falling back to 1 default profile: "default"
+14:32:37 DEBUG - Loading source class com.example.api_gestion_almacen.ApiGestionAlmacenApplication
+14:32:37 DEBUG - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@55795845
+14:32:38 DEBUG - @EnableAutoConfiguration was declared on a class in the package 'com.example.api_gestion_almacen'. Automatic @Repository and @Entity scanning is enabled.
+14:32:39 DEBUG - Code archive: C:\Users\amoliaz\.m2\repository\org\springframework\boot\spring-boot\3.4.2\spring-boot-3.4.2.jar
+14:32:39 DEBUG - Code archive: C:\Users\amoliaz\.m2\repository\org\springframework\boot\spring-boot\3.4.2\spring-boot-3.4.2.jar
+14:32:39 DEBUG - Document root: C:\Users\amoliaz\DWS\api-gestion-almacen11-02\api-gestion-almacen10-02\api-gestion-almacen (1)_1\api-gestion-almacen (1)\api-gestion-almacen\src\main\webapp
+14:32:39 INFO  - Tomcat initialized with port 8081 (http)
+14:32:39 DEBUG - Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+14:32:39 INFO  - Root WebApplicationContext: initialization completed in 1310 ms
+14:32:39 DEBUG - Mapping filters: characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+14:32:39 DEBUG - Mapping servlets: dispatcherServlet urls=[/]
+14:32:39 DEBUG - Filter 'requestContextFilter' configured for use
+14:32:39 DEBUG - Filter 'characterEncodingFilter' configured for use
+14:32:39 DEBUG - Filter 'formContentFilter' configured for use
+14:32:42 DEBUG - 15 mappings in 'requestMappingHandlerMapping'
+14:32:42 DEBUG - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+14:32:42 DEBUG - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+14:32:42 DEBUG - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+14:32:42 DEBUG - Application Admin MBean registered with name 'org.springframework.boot:type=Admin,name=SpringApplication'
+14:32:42 INFO  - Tomcat started on port 8081 (http) with context path '/'
+14:32:42 DEBUG - 
 
 
 ============================
@@ -1145,11 +1145,6 @@ Unconditional classes:
 
 
 
-11:20:36 INFO  - Started ApiGestionAlmacenApplication in 5.455 seconds (process running for 6.154)
-11:20:36 DEBUG - Application availability state LivenessState changed to CORRECT
-11:20:36 DEBUG - Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
-11:27:55 INFO  - Application shutdown requested.
-11:27:55 DEBUG - Application availability state ReadinessState changed from ACCEPTING_TRAFFIC to REFUSING_TRAFFIC
-11:27:55 DEBUG - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6175619b, started on Thu Mar 06 11:20:32 CET 2025
-11:27:55 INFO  - Commencing graceful shutdown. Waiting for active requests to complete
-11:27:55 INFO  - Graceful shutdown complete
+14:32:42 INFO  - Started ApiGestionAlmacenApplication in 5.413 seconds (process running for 6.092)
+14:32:42 DEBUG - Application availability state LivenessState changed to CORRECT
+14:32:42 DEBUG - Application availability state ReadinessState changed to ACCEPTING_TRAFFIC

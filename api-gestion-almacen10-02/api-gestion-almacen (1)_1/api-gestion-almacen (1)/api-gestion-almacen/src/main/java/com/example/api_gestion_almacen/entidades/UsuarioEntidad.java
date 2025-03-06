@@ -29,6 +29,9 @@ public class UsuarioEntidad {
 
     @Column(nullable = false)
     private boolean correoConfirmado;
+    
+    @Column(nullable = false)
+    private boolean google;
 
     @Lob
     @Column(name = "foto", columnDefinition = "LONGBLOB")
@@ -36,6 +39,8 @@ public class UsuarioEntidad {
 
     @Column(name = "fecha_creacion", insertable = false, updatable = false)
     private LocalDateTime fechaCreacion;
+
+    
 
     // Getters y Setters
     public Long getId() {
@@ -108,5 +113,13 @@ public class UsuarioEntidad {
 
     public void setCorreoConfirmado(boolean correoConfirmado) {
         this.correoConfirmado = correoConfirmado;
+    }
+
+    public boolean isGoogle() {
+        return google;
+    }
+
+    public void setGoogle(boolean google) {
+        this.google = google;
     }
 }

@@ -12,6 +12,7 @@ public class UsuarioDto {
 	    private byte[] foto;
 	    private LocalDateTime fechaCreacion;
 	    private boolean correoConfirmado;
+		private boolean google;
 
 
 	    // Getters y Setters
@@ -78,4 +79,11 @@ public class UsuarioDto {
 	    public void setCorreoConfirmado(boolean correoConfirmado) {
 	        this.correoConfirmado = correoConfirmado;
 	    }
+
+	    public boolean isGoogle() {
+			return google;
+		}
+		public void setGoogle(boolean google) {
+			this.google = google;
+		}
 }

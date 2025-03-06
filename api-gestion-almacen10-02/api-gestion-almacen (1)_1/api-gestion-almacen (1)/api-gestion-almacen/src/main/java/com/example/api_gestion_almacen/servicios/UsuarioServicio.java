@@ -132,8 +132,9 @@ public class UsuarioServicio {
         try {
             // 3. Actualizar los campos del usuario
             usuarioExistente.setNombreCompleto(usuarioDTO.getNombreCompleto());
-            usuarioExistente.setCorreoElectronico(usuarioDTO.getCorreoElectronico());
             usuarioExistente.setMovil(usuarioDTO.getMovil());
+            usuarioExistente.setCorreoElectronico(usuarioDTO.getCorreoElectronico());
+            usuarioExistente.setGoogle(usuarioDTO.isGoogle());
 
             // 4. Actualizar el rol si ha cambiado
             if (usuarioDTO.getRolId() != null) {
@@ -256,6 +257,18 @@ public class UsuarioServicio {
     }
 
     /**
+     * Busca un usuario por su correo electrónico.
+     * @author andres
+     * 
+     * @param correoElectronico El correo electrónico del usuario a buscar.
+     * @return El objeto UsuarioDto del usuario encontrado, o null si no se encuentra.
+     */
+    public UsuarioDto buscarPorCorreo(String correoElectronico) {
+        Optional<UsuarioEntidad> usuarioOpt = usuarioRepositorio.findByCorreoElectronico(correoElectronico);
+        return usuarioOpt.map(this::aDto).orElse(null);
+    }
+
+    /**
      * Convierte un UsuarioDto a una UsuarioEntidad.
      * @author andres
      * 
@@ -278,6 +291,8 @@ public class UsuarioServicio {
         
         usuarioEntidad.setFoto(usuarioDTO.getFoto());
         usuarioEntidad.setFechaCreacion(usuarioDTO.getFechaCreacion());
+        usuarioEntidad.setCorreoConfirmado(usuarioDTO.isCorreoConfirmado());
+        usuarioEntidad.setGoogle(usuarioDTO.isGoogle());
         return usuarioEntidad;
     }
     private UsuarioEntidad aEntidad2(CrearUsuDto crearUsuDTO) {
@@ -297,6 +312,7 @@ public class UsuarioServicio {
         
         usuarioEntidad.setContrasena(crearUsuDTO.getContrasena());
         usuarioEntidad.setFoto(crearUsuDTO.getFoto());
+        usuarioEntidad.setGoogle(crearUsuDTO.isGoogle());
         
         return usuarioEntidad;
     }
@@ -314,10 +330,11 @@ public class UsuarioServicio {
         usuarioDTO.setNombreCompleto(usuarioEntidad.getNombreCompleto()); // Establecer el nombre completo
         usuarioDTO.setMovil(usuarioEntidad.getMovil()); // Establecer el número de móvil
         usuarioDTO.setCorreoElectronico(usuarioEntidad.getCorreoElectronico()); // Establecer el correo electrónico
+        usuarioDTO.setRolId(usuarioEntidad.getRol().getId());
         usuarioDTO.setFoto(usuarioEntidad.getFoto()); // Establecer la foto
         usuarioDTO.setFechaCreacion(usuarioEntidad.getFechaCreacion()); // Establecer la fecha de creación
         usuarioDTO.setCorreoConfirmado(usuarioEntidad.isCorreoConfirmado()); // Establecer el estado de confirmación del correo
-        usuarioDTO.setRolId(usuarioEntidad.getRol().getId());
+        usuarioDTO.setGoogle(usuarioEntidad.isGoogle());
         return usuarioDTO; // Devolver el DTO
     }
     private CrearUsuDto aDto2(UsuarioEntidad usuarioEntidad) {
@@ -325,13 +342,10 @@ public class UsuarioServicio {
         usuarioDTO.setNombreCompleto(usuarioEntidad.getNombreCompleto()); // Establecer el nombre completo
         usuarioDTO.setMovil(usuarioEntidad.getMovil()); // Establecer el número de móvil
         usuarioDTO.setCorreoElectronico(usuarioEntidad.getCorreoElectronico()); // Establecer el correo electrónico
+        usuarioDTO.setRolId(usuarioEntidad.getRol().getId());
         usuarioDTO.setFoto(usuarioEntidad.getFoto()); // Establecer la foto
         usuarioDTO.setCorreoConfirmado(usuarioEntidad.isCorreoConfirmado()); // Establecer el estado de confirmación del correo
-        
-        // Manejar el caso de rol nulo
-        if (usuarioEntidad.getRol() != null) {
-            usuarioDTO.setRolId(usuarioEntidad.getRol().getId());
-        }
+        usuarioDTO.setGoogle(usuarioEntidad.isGoogle());
         
         return usuarioDTO; // Devolver el DTO
     }
