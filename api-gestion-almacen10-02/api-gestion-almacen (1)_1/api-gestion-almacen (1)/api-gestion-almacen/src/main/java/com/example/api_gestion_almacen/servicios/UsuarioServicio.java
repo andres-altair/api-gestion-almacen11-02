@@ -10,8 +10,8 @@ import com.example.api_gestion_almacen.dtos.CrearUsuDto;
 import com.example.api_gestion_almacen.dtos.UsuarioDto;
 import com.example.api_gestion_almacen.entidades.RolEntidad;
 import com.example.api_gestion_almacen.entidades.UsuarioEntidad;
-import com.example.api_gestion_almacen.repositorio.RolRepositorio;
-import com.example.api_gestion_almacen.repositorio.UsuarioRepositorio;
+import com.example.api_gestion_almacen.repositorios.RolRepositorio;
+import com.example.api_gestion_almacen.repositorios.UsuarioRepositorio;
 
 /**
  * Servicio para gestionar las operaciones relacionadas con los usuarios.

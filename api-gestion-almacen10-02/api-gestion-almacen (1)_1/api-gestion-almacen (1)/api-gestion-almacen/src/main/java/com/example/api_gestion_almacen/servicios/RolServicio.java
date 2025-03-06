@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.api_gestion_almacen.dtos.RolDto;
 import com.example.api_gestion_almacen.entidades.RolEntidad;
-import com.example.api_gestion_almacen.repositorio.RolRepositorio;
+import com.example.api_gestion_almacen.repositorios.RolRepositorio;
 
 /**
  * Servicio para gestionar las operaciones relacionadas con los roles.

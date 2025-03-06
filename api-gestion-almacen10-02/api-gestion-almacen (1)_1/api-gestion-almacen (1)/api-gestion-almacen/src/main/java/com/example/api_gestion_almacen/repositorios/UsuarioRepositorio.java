@@ -1,4 +1,4 @@
-package com.example.api_gestion_almacen.repositorio;
+package com.example.api_gestion_almacen.repositorios;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
