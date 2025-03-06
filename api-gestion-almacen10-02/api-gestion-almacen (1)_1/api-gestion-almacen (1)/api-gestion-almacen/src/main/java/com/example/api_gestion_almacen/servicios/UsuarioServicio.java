@@ -313,6 +313,7 @@ public class UsuarioServicio {
         usuarioEntidad.setContrasena(crearUsuDTO.getContrasena());
         usuarioEntidad.setFoto(crearUsuDTO.getFoto());
         usuarioEntidad.setGoogle(crearUsuDTO.isGoogle());
+        usuarioEntidad.setCorreoConfirmado(crearUsuDTO.isCorreoConfirmado());
         
         return usuarioEntidad;
     }

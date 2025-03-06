@@ -21,16 +21,16 @@ public class UsuarioEntidad {
     private String correoElectronico;
 
     @ManyToOne
-    @JoinColumn(name = "rol_id", nullable = false)
+    @JoinColumn(name = "rol_id")
     private RolEntidad rol;
 
-    @Column(nullable = false)
+    @Column
     private String contrasena;
 
-    @Column(nullable = false)
+    @Column
     private boolean correoConfirmado;
     
-    @Column(nullable = false)
+    @Column
     private boolean google;
 
     @Lob
@@ -39,8 +39,6 @@ public class UsuarioEntidad {
 
     @Column(name = "fecha_creacion", insertable = false, updatable = false)
     private LocalDateTime fechaCreacion;
-
-    
 
     // Getters y Setters
     public Long getId() {
