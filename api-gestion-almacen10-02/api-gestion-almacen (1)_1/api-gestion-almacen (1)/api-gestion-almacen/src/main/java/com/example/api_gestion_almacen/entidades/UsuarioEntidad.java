@@ -28,7 +28,7 @@ public class UsuarioEntidad {
     private String contrasena;
 
     @Column
-    private boolean correoConfirmado;
+    private Boolean correoConfirmado;
     
     @Column
     private boolean google;
@@ -106,11 +106,11 @@ public class UsuarioEntidad {
     }
 
     public boolean isCorreoConfirmado() {
-        return correoConfirmado;
+        return correoConfirmado != null ? correoConfirmado : false;
     }
 
-    public void setCorreoConfirmado(boolean correoConfirmado) {
-        this.correoConfirmado = correoConfirmado;
+    public void setCorreoConfirmado(Boolean correoConfirmado) {
+        this.correoConfirmado = correoConfirmado != null ? correoConfirmado : false;
     }
 
     public boolean isGoogle() {
