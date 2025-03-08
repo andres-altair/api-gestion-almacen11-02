@@ -12,6 +12,9 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Controlador REST para gestionar las operaciones relacionadas con los sectores.
+ */
 @RestController
 @RequestMapping("/api/sectores")
 public class SectorControlador {
@@ -20,6 +23,11 @@ public class SectorControlador {
     @Autowired
     private SectorServicio sectorServicio;
 
+    /**
+     * Lista todos los sectores disponibles.
+     *
+     * @return ResponseEntity que contiene una lista de sectores en formato DTO.
+     */
     @GetMapping
     public ResponseEntity<List<SectorDto>> listarTodos() {
         LOGGER.debug("Listando todos los sectores");
@@ -29,6 +37,11 @@ public class SectorControlador {
         return ResponseEntity.ok(sectores);
     }
 
+    /**
+     * Lista todos los sectores que están disponibles.
+     *
+     * @return ResponseEntity que contiene una lista de sectores disponibles en formato DTO.
+     */
     @GetMapping("/disponibles")
     public ResponseEntity<List<SectorDto>> listarDisponibles() {
         LOGGER.debug("Listando sectores disponibles");
@@ -38,6 +51,12 @@ public class SectorControlador {
         return ResponseEntity.ok(sectores);
     }
 
+    /**
+     * Obtiene un sector por su ID.
+     *
+     * @param id ID del sector que se desea obtener.
+     * @return ResponseEntity que contiene el sector en formato DTO, o un estado 404 si no se encuentra.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<SectorDto> obtenerPorId(@PathVariable Long id) {
         LOGGER.debug("Buscando sector por ID: {}", id);
@@ -46,6 +65,12 @@ public class SectorControlador {
             .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Obtiene un sector por su nombre.
+     *
+     * @param nombre Nombre del sector que se desea obtener.
+     * @return ResponseEntity que contiene el sector en formato DTO, o un estado 404 si no se encuentra.
+     */
     @GetMapping("/nombre/{nombre}")
     public ResponseEntity<SectorDto> obtenerPorNombre(@PathVariable String nombre) {
         LOGGER.debug("Buscando sector por nombre: {}", nombre);
@@ -54,6 +79,13 @@ public class SectorControlador {
             .orElse(ResponseEntity.notFound().build());
     }
 
+    /**
+     * Actualiza el estado de un sector específico.
+     *
+     * @param id ID del sector cuyo estado se desea actualizar.
+     * @param estado Nuevo estado del sector.
+     * @return ResponseEntity que contiene el sector actualizado en formato DTO, o un estado 404 si no se encuentra.
+     */
     @PutMapping("/{id}/estado")
     public ResponseEntity<SectorDto> actualizarEstado(
             @PathVariable Long id,
@@ -68,6 +100,12 @@ public class SectorControlador {
         }
     }
 
+    /**
+     * Convierte una entidad de sector a un objeto DTO.
+     *
+     * @param sector Entidad de sector a convertir.
+     * @return Objeto DTO que representa el sector.
+     */
     private SectorDto convertirADto(SectorEntidad sector) {
         SectorDto dto = new SectorDto();
         dto.setId(sector.getId());

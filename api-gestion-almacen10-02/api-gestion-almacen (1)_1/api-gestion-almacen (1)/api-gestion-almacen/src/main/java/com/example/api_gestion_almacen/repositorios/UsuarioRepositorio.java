@@ -14,8 +14,13 @@ import com.example.api_gestion_almacen.entidades.UsuarioEntidad;
  */
 @Repository
 public interface UsuarioRepositorio extends JpaRepository<UsuarioEntidad, Long> {
+     /**
+     * Encuentra un usuario por su correo electrónico.
+     *
+     * @param correoElectronico El correo electrónico del usuario que se desea encontrar.
+     * @return Un objeto Optional que contiene el usuario si se encuentra, o vacío si no se encuentra.
+     */
     Optional<UsuarioEntidad> findByCorreoElectronico(String correoElectronico);
 }
-
 
 

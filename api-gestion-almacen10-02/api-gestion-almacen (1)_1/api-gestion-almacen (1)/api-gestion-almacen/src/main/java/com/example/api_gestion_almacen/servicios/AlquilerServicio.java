@@ -11,6 +11,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Servicio para gestionar las operaciones relacionadas con los alquileres.
+ */
 @Service
 public class AlquilerServicio {
     
@@ -20,6 +23,18 @@ public class AlquilerServicio {
     @Autowired
     private SectorServicio sectorServicio;
     
+    /**
+     * Crea un nuevo alquiler.
+     *
+     * @param sectorId ID del sector que se va a alquilar.
+     * @param usuarioId ID del usuario que realiza el alquiler.
+     * @param ordenId ID de la orden asociada al alquiler.
+     * @param montoPagado Monto pagado por el alquiler.
+     * @param fechaInicio Fecha y hora de inicio del alquiler.
+     * @param fechaFin Fecha y hora de finalización del alquiler.
+     * @return La entidad de alquiler creada.
+     * @throws RuntimeException si el sector no está disponible o no se encuentra.
+     */
     @Transactional
     public AlquilerEntidad crearAlquiler(Long sectorId, Long usuarioId, String ordenId, 
                                         BigDecimal montoPagado, LocalDateTime fechaInicio, 
@@ -48,10 +63,22 @@ public class AlquilerServicio {
         return alquilerRepositorio.save(alquiler);
     }
     
+    /**
+     * Lista todos los alquileres de un usuario específico.
+     *
+     * @param usuarioId ID del usuario cuyos alquileres se desean listar.
+     * @return Lista de entidades de alquiler asociadas al usuario.
+     */
     public List<AlquilerEntidad> listarAlquileresUsuario(Long usuarioId) {
         return alquilerRepositorio.findByUsuarioId(usuarioId);
     }
     
+    /**
+     * Finaliza un alquiler específico.
+     *
+     * @param alquilerId ID del alquiler que se desea finalizar.
+     * @throws RuntimeException si el alquiler no se encuentra.
+     */
     @Transactional
     public void finalizarAlquiler(Long alquilerId) {
         AlquilerEntidad alquiler = alquilerRepositorio.findById(alquilerId)
